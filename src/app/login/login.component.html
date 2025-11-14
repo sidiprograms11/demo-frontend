@@ -1,0 +1,9 @@
+<div style="max-width:380px;margin:60px auto;font-family:sans-serif">
+  <h2>Connexion</h2>
+  <form (ngSubmit)="submit()" style="display:grid;gap:12px">
+    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Mot de passe" required />
+    <button [disabled]="loading" type="submit">Se connecter</button>
+    <div *ngIf="error" style="color:#b91c1c">{{ error }}</div>
+  </form>
+</div>

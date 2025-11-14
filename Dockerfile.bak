@@ -1,0 +1,26 @@
+# Étape 1 : build Angular (optionnel si tu as déjà 'dist', mais pratique pour CI)
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Étape 2 : Nginx pour servir le site statique
+FROM nginx:alpine
+
+# Cloud Run attend que l’app écoute sur $PORT (par défaut 8080).
+# On force Nginx à écouter sur 8080 via une conf perso.
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copie les fichiers buildés
+# (si tu as utilisé l'étape build ci-dessus)
+COPY --from=build /app/dist/* /usr/share/nginx/html/
+# (sinon, si tu as déjà 'dist' localement, utilise:)
+# COPY dist/* /usr/share/nginx/html/
+
+# Optionnel : page santé
+RUN printf 'OK\n' > /usr/share/nginx/html/healthz.txt
+
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]

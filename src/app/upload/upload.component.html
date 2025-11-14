@@ -1,0 +1,133 @@
+<!-- Kôrè Cyber Labs · Bamako (Careers) -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="logo"></div>
+      <div class="brand-meta">
+        <h1>La Maison Du Cyber</h1>
+        <p class="tag">Bamako • Defensive Security • Cloud & AppSec</p>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <span class="badge">Nous recrutons</span>
+      <span class="sep"></span>
+      <span class="pill">Stage • CDI • Junior</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <!-- Colonne principale -->
+  <section class="card main">
+    <h2>Dépôt de candidature</h2>
+    <p class="subtitle">
+      Dépose ton email, un court message et ton CV (PDF). Notre équipe sécurité revient vers toi rapidement.
+    </p>
+
+    <!-- Drag & drop + input -->
+    <div class="dropzone"
+         (dragover)="onDragOver($event)"
+         (dragleave)="onDragLeave($event)"
+         (drop)="onDrop($event)"
+         [class.over]="dragOver">
+      <input class="file-input" type="file" accept="application/pdf" (change)="onFile($event)">
+      <div class="dropzone-content">
+        <div class="dz-icon">⬆</div>
+        <div>
+          <strong>Glisse ton CV ici</strong> ou <span class="link">clique pour parcourir</span><br>
+          <span class="hint">PDF uniquement • 10 Mo max</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire -->
+    <form (ngSubmit)="submit()">
+      <input type="email"
+             [(ngModel)]="email"
+             name="email"
+             placeholder="Email du candidat"
+             required />
+
+      <textarea
+        [(ngModel)]="message"
+        name="message"
+        placeholder="Message (optionnel) – motivations, stack, projets..."
+        rows="4"
+      ></textarea>
+
+      <div class="file-chip" *ngIf="file">
+        <span class="dot"></span>
+        {{ file.name }}
+      </div>
+
+      <button type="submit" [disabled]="!email || !file || loading">
+        {{ loading ? 'Envoi…' : 'Envoyer la candidature' }}
+      </button>
+    </form>
+
+    <!-- Progression upload -->
+    <div class="progress" *ngIf="loading">
+      <div class="bar" [style.width.%]="progress"></div>
+      <span class="pct">{{progress}}%</span>
+    </div>
+
+    <!-- Liste candidats -->
+    <div class="list" *ngIf="candidates && candidates.length > 0">
+      <h3>Candidatures reçues</h3>
+
+      <div class="item" *ngFor="let c of candidates">
+        <div class="avatar">{{ c.email | slice:0:1 | uppercase }}</div>
+        <div class="meta">
+          <div class="top">
+            <span class="email">{{ c.email }}</span>
+            <span class="badge soft">PDF</span>
+          </div>
+          <div class="info">
+            <span class="file">{{ c.filename }}</span>
+            <span class="dot"></span>
+            <span class="time">{{ c.uploadedAt | date:'short' }}</span>
+          </div>
+          <div class="msg" *ngIf="c.messageText">{{ c.messageText }}</div>
+        </div>
+
+        <div class="actions">
+          <button class="ghost" (click)="download(c.id)">Télécharger</button>
+          <button class="danger ghost" (click)="remove(c.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+
+    <p *ngIf="!candidates || candidates.length === 0" class="subtitle empty">
+      Aucun candidat pour l’instant. Sois le premier à rejoindre l’aventure 🇲🇱
+    </p>
+  </section>
+
+  <!-- Colonne latérale / vitrine -->
+  <aside class="card side">
+    <h3>Pourquoi nous rejoindre ?</h3>
+    <ul class="bullets">
+      <li>🔐 Projets concrets en AppSec & Cloud (GCP, WIF, Secret Manager)</li>
+      <li>🧠 Mentorat Blue Team & Offensive Labs</li>
+      <li>☁️ Déploiements modernes (Cloud Run + Cloud SQL)</li>
+      <li>🌍 Impact local : écosystème tech Mali</li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <h4>Stacks & sujets</h4>
+    <div class="chips">
+      <span>Audit</span><span>Pentest</span><span>GRC</span>
+      <span>Cloud</span><span>DevSecOps</span><span>CI/CD</span>
+      <span>Cloud Security</span>
+    </div>
+
+    <div class="note">
+      Tu peux aussi nous écrire : <strong>sidigano8@gmail.com</strong>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  © {{year}} La Maison Du Cyber — “Sécuriser par notre organisation”
+</footer>

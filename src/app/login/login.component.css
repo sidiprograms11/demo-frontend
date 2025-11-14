@@ -1,0 +1,33 @@
+.login-container {
+    max-width: 400px;
+    margin: 80px auto;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  

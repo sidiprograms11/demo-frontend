@@ -1,0 +1,298 @@
+:root{
+  --bg: #0b1220;
+  --card: #0f1a2b;
+  --muted: #8aa0c2;
+  --text: #eeeff3;
+  --border: #16233a;
+  --primary: #00E6A7;     /* accent néon */
+  --primary-2: #11b5ff;   /* bleu cyber */
+  --danger: #ff5861;
+  --ok: #18e07f;
+  --radius: 16px;
+  --shadow: 0 20px 60px rgba(0,0,0,.35);
+}
+
+/* Reset/minimal */
+*{ box-sizing: border-box }
+html,body{ height:100% }
+body{
+  margin:0; color:var(--text); background:
+    radial-gradient(60% 80% at 110% -10%, rgba(17,181,255,.12), transparent 60%),
+    radial-gradient(60% 80% at -10% -10%, rgba(0,230,167,.12), transparent 60%),
+    var(--bg);
+  font: 14.5px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* Hero */
+.hero{
+  border-bottom: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(17,181,255,.08), rgba(0,0,0,0));
+}
+.hero-inner{
+  max-width:1100px; margin: 24px auto; padding: 0 20px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.brand{ display:flex; align-items:center; gap:14px }
+.logo{
+  width:42px; height:42px; border-radius:12px;
+  display:grid; place-items:center;
+  color:#00151b; font-weight:800;
+  background:
+    linear-gradient(135deg, var(--primary), var(--primary-2));
+  box-shadow: 0 8px 24px rgba(17,181,255,.25);
+}
+.brand-meta h1{ margin:0; font-size:20px; letter-spacing:.3px }
+.tag{ margin:2px 0 0; color:var(--muted); font-size:13px }
+.hero-cta{ display:flex; align-items:center; gap:8px }
+.badge{
+  background: rgba(0,230,167,.18);
+  color: var(--ok); border:1px solid rgba(0,230,167,.35);
+  padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px;
+}
+.sep{ width:8px; height:8px; border-radius:50%; background:var(--border) }
+.pill{
+  padding:6px 10px; border-radius:999px;
+  border:1px dashed var(--border); color:var(--muted); font-size:12px;
+}
+
+/* Layout */
+.page{
+  max-width:1100px; margin: 26px auto; padding: 0 20px;
+  display:grid; gap:20px; grid-template-columns: 1.3fr .7fr;
+}
+.card{
+  background: var(--card); border:1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding:22px;
+}
+.main h2{ margin:0 0 6px; font-size:22px }
+.subtitle{ margin:0 0 16px; color:var(--muted) }
+.subtitle.empty{ margin-top:8px; text-align:center }
+
+/* Dropzone */
+.dropzone{
+  position:relative; border:1px dashed #244364; border-radius:14px;
+  background: #0c182b;
+  padding:18px; margin-bottom:14px;
+  transition: border .15s, box-shadow .15s, transform .15s;
+}
+.dropzone.over{
+  border-color: var(--primary); box-shadow: 0 0 0 6px rgba(0,230,167,.08);
+  transform: translateY(-1px);
+}
+.file-input{
+  position:absolute; inset:0; opacity:0; cursor:pointer;
+}
+.dropzone-content{
+  display:flex; align-items:center; gap:14px; color:#cfe8ff;
+}
+.dz-icon{
+  width:38px; height:38px; border-radius:10px; display:grid; place-items:center;
+  background: rgba(17,181,255,.15); color:#9ce2ff; font-weight:900;
+}
+
+/* Form */
+form{ display:grid; gap:12px; grid-template-columns: 1fr auto }
+input[type="email"], textarea{
+  grid-column: 1 / -1;
+  width:100%; background:#0c182b; color:var(--text);
+  border:1px solid #213656; border-radius:12px; padding:12px 14px;
+  outline:none; transition: border .15s, box-shadow .15s;
+}
+input[type="email"]:focus, textarea:focus{
+  border-color:#2c5a87; box-shadow: 0 0 0 4px rgba(44,90,135,.25);
+  background:#0d1b31;
+}
+textarea{ min-height:110px; resize:vertical }
+.file-chip{
+  display:inline-flex; align-items:center; gap:8px;
+  background:#0d2337; color:#a6d9ff; border:1px solid #1f3d60;
+  padding:8px 10px; border-radius:999px; font-size:13px;
+}
+.file-chip .dot{ width:8px; height:8px; border-radius:50%; background:var(--primary) }
+
+/* Button */
+button{
+  grid-column: 2 / 3;
+  padding:12px 16px; border:none; border-radius:12px; cursor:pointer;
+  color:#00151b; font-weight:800;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  box-shadow: 0 10px 28px rgba(17,181,255,.25);
+  transition: transform .12s ease, filter .12s ease;
+}
+button:hover{ transform: translateY(-1px); filter: brightness(1.03) }
+button:active{ transform: translateY(1px) }
+button[disabled]{ opacity:.6; cursor:not-allowed; box-shadow:none }
+
+/* Progress */
+.progress{
+  margin-top:10px; position:relative; height:10px; border-radius:999px;
+  background:#0c1d2f; border:1px solid #1a2e4c; overflow:hidden;
+}
+.progress .bar{
+  position:absolute; inset:0 auto 0 0; width:0%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-2));
+  box-shadow: 0 0 20px rgba(17,181,255,.35) inset;
+}
+.progress .pct{
+  margin-top:8px; display:block; color:var(--muted); font-size:12px;
+}
+
+/* Liste candidats */
+.list{ margin-top:18px }
+.list h3{ margin:0 0 10px; font-size:16px; color:#cfe8ff }
+.item{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+  background:#0b1a2d; border:1px solid #1a2e4c; border-radius:12px; padding:14px 16px;
+}
+.item + .item{ margin-top:10px }
+.avatar{
+  flex:0 0 36px; height:36px; border-radius:10px; display:grid; place-items:center;
+  font-weight:800; color:#00151b;
+  background: linear-gradient(135deg, #11b5ff, #00E6A7);
+}
+.meta{ flex:1 1 auto }
+.meta .top{ display:flex; align-items:center; gap:8px; margin-bottom:4px }
+.meta .email{ font-weight:700 }
+.badge.soft{
+  padding:3px 8px; border-radius:999px; font-size:11px;
+  color:#9bdfff; background: rgba(17,181,255,.14); border:1px solid rgba(17,181,255,.3);
+}
+.meta .info{ display:flex; align-items:center; gap:8px; color:var(--muted); font-size:12px }
+.meta .info .dot{ width:6px; height:6px; border-radius:50%; background:#2f476f }
+.meta .msg{ margin-top:6px; color:#cddbf0 }
+
+.actions{ display:flex; gap:8px; flex-wrap:wrap }
+.actions .ghost{
+  background:#0e2035; border:1px solid #233a5c; color:#cfe8ff;
+  padding:10px 12px; border-radius:10px;
+}
+.actions .danger{
+  border-color: rgba(255,88,97,.4); color:#ff9297; background:#2b0f14;
+}
+
+/* Side panel */
+.side h3, .side h4{ margin:0 0 10px }
+.bullets{ margin:0 0 14px; padding-left:18px }
+.bullets li{ margin:6px 0; color:#cddbf0 }
+.divider{ height:1px; background:var(--border); margin:14px 0 }
+.chips{ display:flex; flex-wrap:wrap; gap:8px }
+.chips span{
+  padding:6px 10px; border-radius:999px; border:1px solid #233a5c; color:#cfe8ff; background:#0e2035;
+  font-size:12px;
+}
+.note{ margin-top:14px; color:#9ec7ff }
+
+/* Footer */
+.foot{
+  max-width:1100px; margin: 24px auto 40px; padding: 0 20px;
+  color:var(--muted); text-align:center; font-size:12.5px;
+  border-top:1px solid var(--border); padding-top:16px;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .page{ grid-template-columns: 1fr }
+  .hero-inner{ flex-direction:column; align-items:flex-start; gap:10px }
+  button{ grid-column: 1 / -1 }
+}
+/* === 1) Texte visible quand on tape (inputs/textarea) === */
+input[type="email"],
+textarea{
+  color: var(--text) !important;   /* texte clair */
+  caret-color: var(--primary-2);   /* curseur bleu-cyber */
+}
+
+/* placeholders lisibles */
+input[type="email"]::placeholder,
+textarea::placeholder{
+  color: var(--muted);
+  opacity: .95;
+}
+
+/* Autofill Chrome (sinon texte noir sur fond sombre) */
+input[type="email"]:-webkit-autofill,
+textarea:-webkit-autofill{
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--primary-2);
+  -webkit-box-shadow: 0 0 0 1000px #0d1b31 inset !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+}
+
+/* === 2) Couleur des emails dans la liste des candidatures === */
+.meta .email{
+  color: var(--text) !important;   /* force en clair */
+}
+
+/* === 3) Callout (carte) "Pourquoi nous rejoindre / Stacks" === */
+/* même teinte que le badge "Nous recrutons" */
+.callout{
+  background: #0e2035;
+  border: 1px solid #233a5c;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
+}
+.callout h3,
+.callout h4{
+  margin: 0 0 10px;
+  color: var(--ok);                 /* vert du badge */
+}
+.callout .bullets li{ color: #cfe8ff; }   /* texte lisible */
+.callout .chips span{
+  background:#0e2035;
+  border-color:#233a5c;
+  color:#cfe8ff;
+}
+/* === Force la couleur du texte saisi (input & textarea) en blanc pur === */
+input[type="email"],
+textarea {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important; /* Chrome / Edge */
+}
+/* === Section "Pourquoi nous rejoindre ?" — fond sombre + texte blanc === */
+.side {
+  background: #0e2035;                     /* fond sombre uniforme */
+  border: 1px solid #233a5c;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .25);
+}
+
+/* Texte lisible en blanc pur */
+.side,
+.side .bullets li {
+  color: #ffffff;                          /* texte blanc */
+}
+
+/* Titre légèrement bleu pour contraste */
+.side h3 {
+  color: var(--primary-2);                 /* ton bleu cyber pour le titre */
+}
+
+/* Les emojis gardent leur couleur naturelle */
+.side .bullets li::marker {
+  color: inherit;
+}
+/* === Lisibilité du texte dans les candidatures envoyées === */
+.list .item {
+  color: var(--text) !important;          /* texte clair */
+}
+
+.list .item .email,
+.list .item .file,
+.list .item .msg {
+  color: var(--text) !important;          /* emails, fichiers et messages visibles */
+}
+
+
+/* Si tu veux un blanc encore plus franc pour le message */
+.list .item .meta .msg {
+  color: #ffffff !important;
+}
+.list .item .meta .file {
+  color: #ffffff !important;
+}
+.list .item .meta .email {
+  color: #ffffff !important;
+}
