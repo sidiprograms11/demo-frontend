@@ -1,0 +1,37 @@
+# cloudbuild.yaml (FRONTEND - Angular + Express)
+
+steps:
+  # 1) Build de l'image Docker du frontend
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build frontend image'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/app-repo/cv-frontend:$SHORT_SHA'
+      - '.'
+
+  # 2) Push de l'image vers Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push frontend image'
+    args:
+      - 'push'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/app-repo/cv-frontend:$SHORT_SHA'
+
+  # 3) Déploiement sur Cloud Run (cv-frontend)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy to Cloud Run (frontend)'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'cv-frontend'
+      - '--image'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/app-repo/cv-frontend:$SHORT_SHA'
+      - '--region'
+      - 'europe-west1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+images:
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/app-repo/cv-frontend:$SHORT_SHA'
